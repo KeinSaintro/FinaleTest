@@ -67,7 +67,7 @@ class GoogleLoginHandler(tornado.web.RequestHandler, tornado.auth.GoogleOAuth2Mi
     def get(self):
         if self.get_argument('code', False):
             access = yield self.get_authenticated_user(
-                redirect_uri='http://localhost:8000/login',
+                redirect_uri='http://protected-brook-2075.herokuapp.com/login',
                 code=self.get_argument('code'))
             user = yield self.oauth2_request(
                 "https://www.googleapis.com/oauth2/v1/userinfo",
@@ -88,7 +88,7 @@ class FBLoginHandler(tornado.web.RequestHandler, tornado.auth.FacebookGraphMixin
     def get(self):
         if self.get_argument("code", False):
             user = yield self.get_authenticated_user(
-                redirect_uri='http://localhost:8000/fblogin',
+                redirect_uri='http://protected-brook-2075.herokuapp.com/fblogin',
                 client_id=self.settings["facebook_api_key"],
                 client_secret=self.settings["facebook_secret"],
                 code=self.get_argument("code"))
@@ -96,7 +96,7 @@ class FBLoginHandler(tornado.web.RequestHandler, tornado.auth.FacebookGraphMixin
             self.redirect("/create")
         else:
             yield self.authorize_redirect(
-                redirect_uri='http://localhost:8000/fblogin',
+                redirect_uri='http://protected-brook-2075.herokuapp.com/fblogin',
                 client_id=self.settings["facebook_api_key"],
                 extra_params={"scope": "email, public_profile"})
 
