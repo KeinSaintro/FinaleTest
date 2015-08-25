@@ -22,7 +22,7 @@
    	</head>
    	<body>
 			     <form action="{{ request.path }}" method="post">
-				<b>{{ _title }}</b><br>
+				<b>{{ _title[0] }}</b><br>
 			{% for i in range(len(_vot)) %}
 				<b>{{ _vot[i][2] }}</b><br>
 					{% for ans in _ans[i] %}
