@@ -21,7 +21,7 @@
 			<script>
 				function showValues() {
 						var fields = $(":radio, :checkbox").serializeArray();
-						var nextlock = 'http://localhost:8000/stats/{{ interid }}'
+						var nextlock = '/stats/{{ interid }}'
 						var ans = [];
 						var interid = '{{ interid }}'
 						jQuery.each(fields, function(i, field){

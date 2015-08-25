@@ -35,7 +35,7 @@
 			<script>
 				function showValues() {
 						var fields = $(":input, :checkbox").serializeArray();
-						var nextlock = 'http://localhost:8000/list'
+						var nextlock = '/list'
 						var ans = [];
 						jQuery.each(fields, function(i, field){
 						ans.push(field.name + " " + field.value );
