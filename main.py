@@ -161,7 +161,7 @@ class ListHandler(BaseHandler):
         c.execute('SELECT * FROM inter')
         rows = c.fetchall()
         for row in rows:
-                self.write('<a href="http://localhost:8000/view/'+ str(row[0]) + '"> ' + row[1].encode('cp1251')+' </a><br><br>')
+                self.write('<a href="/view/'+ str(row[0]) + '"> ' + row[1].encode('cp1251')+' </a><br><br>')
         self.render('list.html', user=self.current_user)
         conn.close()
 
