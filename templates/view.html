@@ -1,0 +1,60 @@
+<html>
+   	<head>
+			<title>Tornado</title>
+    			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    			<link rel="stylesheet" type="text/css" href="{{ static_url("work.css") }}">
+			    <nav class="navbar navbar-default navbar-fixed-top">
+			      <div class="container">
+				<div class="navbar-header">
+				  <a class="navbar-brand" href="">Tornado</a>
+				</div>
+				<div id="navbar" class="navbar-collapse collapse">
+				  <ul class="nav navbar-nav navbar-right">
+				        <li><a href="/list">List</a></li>
+					<li><a href="/create">Create</a></li>
+				        <li><a href="/logout">Logout</a></li>
+				  </ul>
+				</div>
+			      </div>
+			    </nav>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+			<script>
+				function showValues() {
+						var fields = $(":radio, :checkbox").serializeArray();
+						var nextlock = 'http://localhost:8000/stats/{{ interid }}'
+						var ans = [];
+						var interid = '{{ interid }}'
+						jQuery.each(fields, function(i, field){
+						ans.push(field.value);
+						});
+						$.ajax({
+						url: "/saveview",
+						type: "POST",
+						data: {"ans": JSON.stringify(ans), "interid": interid},
+						success: function( data ) {
+							window.location.href = nextlock
+						}
+					});
+				}
+
+			</script>
+   	</head>
+   	<body>
+			     <form action="{{ request.path }}" method="post">
+				<b>{{ _title }}</b><br>
+			{% for i in range(len(_vot)) %}
+				<b>{{ _vot[i][2] }}</b><br>
+				{% if _vot[i][3] == 1 %}
+					{% for ans in _ans[i] %}
+					<input type=checkbox name="{{ ans[1] }}" value={{ ans[0] }}> {{ ans[2] }}<br>
+			       		{% end %}
+				{% else %}
+					{% for ans in _ans[i] %}
+					<input type="radio" name="{{ ans[1] }}" value={{ ans[0] }}> {{ ans[2] }}<br>
+			       		{% end %}
+			 	{% end %}
+			{% end %}
+			     </form>
+				<input type="button" value="Ответить на опрос" onclick="showValues()"><br>
+   	</body>			       
+ </html>
